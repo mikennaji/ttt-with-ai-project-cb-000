@@ -67,13 +67,27 @@ def won?
 
 end
 
+def draw?
+  self.board.full?
+  set = self.won?
+    if set.nil?
+      return true
+    end
+  if set== WIN_COMBINATIONS[0]
+    return false
+  end
+
+
+
+end
+
 def over?
-  set = won?
-  if set.nil? && full?
+  set = self.won?
+  if set.nil? && self.board.full?
     return true
   end
-  draw?
-  won?
+  self.draw?
+  self.won?
 end
 
 def play
@@ -93,6 +107,52 @@ def play
 
 
  end
+
+ def move(board, index, character)
+    board[index] = character
+  end
+
+  def winner
+
+    set = self.won?
+    if set.nil?
+      return nil
+    end
+    win_set =self.board.cells[set[0]]
+    if win_set == "O"
+      return "O"
+    end
+    if win_set == "X"
+      return "X"
+    else
+      return nil
+    end
+
+
+
+  end
+
+  def move(index, character)
+  self.board.cells[index] = character
+end
+
+
+
+def turn
+ puts "Please choose a number 1-9:"
+  user_input = gets.strip
+  index = self.board.input_to_index(user_input)
+  if self.board.valid_move?(index)
+    player_token = current_player.token
+    move(index, player_token)
+    self.board.display
+  else
+    turn
+  end
+
+end
+
+
 
 
 end

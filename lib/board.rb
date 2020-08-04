@@ -26,6 +26,7 @@ def display
   end
 
 
+
   def turn_count
     counter = 0
     self.cells.each do |play|
