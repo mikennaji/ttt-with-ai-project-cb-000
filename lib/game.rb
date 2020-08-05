@@ -132,27 +132,50 @@ def play
 
   end
 
-  def move(index, character)
-  self.board.cells[index] = character
-end
+#  def move(index, character)
+#  self.board.cells[index] = character
+#end
+
+
+
+#def turn
+# puts "Please choose a number 1-9:"
+#  user_input = gets
+#  state = self.board.full? || self.over?
+#  while state=== false
+#    index = self.board.input_to_index(user_input)
+#    if self.board.valid_move?(index)
+#    player_token = current_player.token
+#    move(index, player_token)
+#    self.board.display
+#  else
+#    turn
+#      break if state===true
+#    end
+#  end
+
+#end
 
 
 
 def turn
  puts "Please choose a number 1-9:"
-  user_input = gets.strip
+  user_input = gets
   index = self.board.input_to_index(user_input)
+  until self.over? === true
   if self.board.valid_move?(index)
     player_token = current_player.token
     move(index, player_token)
     self.board.display
   else
     turn
+    if self.board.full? || self.game.won?
+      break
+    end
+  end
   end
 
 end
-
-
 
 
 end
